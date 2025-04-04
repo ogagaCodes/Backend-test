@@ -25,8 +25,8 @@ Each order should contain:
 ### Tech Requirements
 
     Use any language/framework you're comfortable with (Node.js, Python, Go, Java, etc.).
-    Store data in AWS DynamoDB or S3 (whichever you're more comfortable with).
-    Use AWS Lambda or Express (or similar lightweight setup).
+    Store data in AWS DynamoDB, S3 or whichever storage you're more comfortable with.
+    Use AWS Lambda, Express or similar lightweight setup.
     Add a simple README with how to run it locally or deploy via AWS (even mock AWS if needed).
 
 ### Bonus (Optional)
