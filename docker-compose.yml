@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb
+    ports:
+      - "8000:8000"
+    networks:
+      app-network:
+        aliases:
+          - dynamodb
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    ports:
+      - "3040:3040"
+    environment:
+      - IS_LOCAL=true
+      - ORDERS_TABLE=orders-dev
+      - AWS_REGION=local-env
+      - AWS_ACCESS_KEY_ID=mock
+      - AWS_SECRET_ACCESS_KEY=mock
+      - DYNAMODB_ENDPOINT=http://dynamodb:8000  # explicitly set endpoint here
+    depends_on:
+      - dynamodb
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
